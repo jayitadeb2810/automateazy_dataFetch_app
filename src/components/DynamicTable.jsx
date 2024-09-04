@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 
 const DynamicTable = () => {
   const [data, setData] = useState([])
-  console.log(data)
+  const [error, setError] = useState(null)
   const [search, setSearch] = useState("")
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] =
@@ -20,6 +20,16 @@ const DynamicTable = () => {
           a.name.localeCompare(b.name)
         )
         setData(sortedData)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.error(
+          "Error fetching data:",
+          error
+        )
+        setError(
+          "Failed to fetch data. Please try again later."
+        )
         setLoading(false)
       })
   }, [])
@@ -58,6 +68,14 @@ const DynamicTable = () => {
         <p className=" font-semibold">
           Data Loading...
         </p>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className=" w-screen h-screen flex items-center justify-center">
+        <p className=" text-red-500">{error}</p>
       </div>
     )
   }
