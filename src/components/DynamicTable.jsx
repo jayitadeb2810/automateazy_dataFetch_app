@@ -54,9 +54,11 @@ const DynamicTable = () => {
 
   if (loading) {
     return (
-      <p className="text-center">
-        Loading data...
-      </p>
+      <div className=" w-screen h-screen flex items-center justify-center">
+        <p className=" font-semibold">
+          Data Loading...
+        </p>
+      </div>
     )
   }
 
